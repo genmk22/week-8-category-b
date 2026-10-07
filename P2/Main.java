@@ -1,6 +1,0 @@
-class Student{String name;Student(String n){name=n;}}
-abstract class Assignment{String name;int maxMarks;Assignment(String n,int m){name=n;maxMarks=m;}abstract double latePenaltyPerDay();}
-class Coding extends Assignment{Coding(String n,int m){super(n,m);}double latePenaltyPerDay(){return .10;}}
-class Written extends Assignment{Written(String n,int m){super(n,m);}double latePenaltyPerDay(){return .20;}}
-class Submission{Student student;Assignment assignment;int daysLate;String status="Pending";double finalMarks;Submission(Student s,Assignment a,int d){student=s;assignment=a;daysLate=d;}void submit(){if(!status.equals("Pending"))throw new IllegalStateException("Cannot resubmit");status="Submitted";}void grade(double awarded){if(!status.equals("Submitted"))throw new IllegalStateException("Submit first");finalMarks=Math.max(0,awarded*(1-daysLate*assignment.latePenaltyPerDay()));status="Graded";}}
-public class Main{public static void main(String[]a){Submission s=new Submission(new Student("Ravi"),new Written("Essay",50),2);s.submit();s.grade(40);System.out.println(s.finalMarks+"/50");}}
